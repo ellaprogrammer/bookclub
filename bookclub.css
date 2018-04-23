@@ -1,0 +1,91 @@
+
+body {
+	min-height: 100vh;  /* need this line to 
+					tell body to fill viewport */
+	font-family: 'Roboto', sans-serif;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	color: blue;
+}
+
+header {
+    text-align: left;
+    padding: 3%;
+    padding-bottom: 9%;
+    padding-left: 2%;
+}
+
+#search-field {
+	padding: 10%;
+	padding-top: 0;
+	padding-bottom: 5%;
+}
+
+.input-info {
+	display: flex;
+    justify-content: center;
+    padding-bottom: 6%;
+}
+
+.search-button {
+	display: flex;
+	justify-content: center;
+}
+
+#button {
+	color:#FFFFFF;
+	background-color: #4A73FF;
+	border-radius: 10px;
+	padding: 1.2%;
+	padding-right: 3%;
+	padding-left: 3%;
+	font-size: 120%; 
+}
+
+.field-item{
+	padding-right: 2%;
+}
+
+.boxHeader {
+	color:#4A73FF;
+	padding-bottom: 7%;
+}
+
+
+#header-title {
+   font-size: xx-large;
+   font-weight: bold;
+   color:#4A73FF;
+}
+
+#search-title{
+	font-size: xx-large;
+	color:black;
+	font-weight: normal;
+}
+
+
+main {
+     flex: 1 0 auto;  /* the sticky footer trick without the footer */
+     color: black;
+     display:flex;
+     flex-direction: column;
+}
+
+
+input {
+	border-style: solid;
+	border-radius: 10px;
+	font-size: medium;
+	height: 80%;
+	border-color: #4A73FF;
+}
+
+p {
+	font-size: medium;
+	margin: 10px;
+}
+
+
+

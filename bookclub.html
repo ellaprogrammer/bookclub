@@ -1,0 +1,45 @@
+<!doctype HTML>
+<html>
+<head>
+<title>Make a Book List</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="reset.css">
+<link rel="stylesheet" type="text/css" href="bookclub.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"> 
+</head>
+
+<body>
+
+<header>
+	<h1 id="header-title">BOOK CLUB</h1>
+</header>
+
+
+<main>
+	<div id="search-field">
+		<h2 id="search-title"> Search for a book...</h2>
+	</div>
+	<div class="input-info">	
+		<div class="field-item"> <h1 class="boxHeader">Author</h1> <input id="author" placeholder="ex William Shakespeare"> </div>
+		<div class="field-item"> <h1 class="boxHeader"">Title</h1> <input id="title" placeholder="ex Romeo and Juliet"> </div>
+		<div class="field-item"> <h1 class="boxHeader">ISBN</h1> <input id="isbn" placeholder="ex 000-0-00-000000-0"> </div>
+	</div>
+
+	<div class="search-button">
+		<button id=button onclick="newRequest()">Search</button>
+	</div>
+
+	<div id="bookDisplay">
+	</div>
+
+</main>
+
+<!-- The Javascript for this page -->
+<script src="bookclub.js"> </script>
+
+<!-- The JSONp request -->
+<script id="dummy"></script>  
+
+</body>
+</html>
