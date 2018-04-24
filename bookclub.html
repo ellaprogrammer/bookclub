@@ -15,6 +15,14 @@
 	<h1 id="header-title">BOOK CLUB</h1>
 </header>
 
+<div class="overlay_base" id="overlay">
+    <div class="overlay_inner">
+        <button class="overlay_button" type="button" onClick="HideOverlay();">X</button>
+        <div id="bookDisplay">
+	</div>
+    </div>
+</div>
+
 
 <main>
 	<div id="search-field">
@@ -27,16 +35,15 @@
 	</div>
 
 	<div class="search-button">
-		<button id=button onclick="newRequest()">Search</button>
+		<button id=button onclick="newRequest(); ShowOverlay();">Search</button>
 	</div>
 
-	<div id="bookDisplay">
-	</div>
+	
 
 </main>
 
 <!-- The Javascript for this page -->
-<script src="bookclub.js"> </script>
+<script type="text/javascript" src="bookclub.js"> </script>
 
 <!-- The JSONp request -->
 <script id="dummy"></script>  

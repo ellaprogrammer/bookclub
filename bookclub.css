@@ -11,9 +11,15 @@ body {
 
 header {
     text-align: left;
-    padding: 3%;
+    padding: 4%;
     padding-bottom: 9%;
-    padding-left: 2%;
+    padding-left: 3%;
+}
+
+.or-separator{
+	color:#4A73FF;
+	font-size: large;
+	font-weight: bold;
 }
 
 #search-field {
@@ -26,7 +32,7 @@ header {
 	display: flex;
     justify-content: center;
     padding-bottom: 6%;
-}
+    }
 
 .search-button {
 	display: flex;
@@ -50,6 +56,8 @@ header {
 .boxHeader {
 	color:#4A73FF;
 	padding-bottom: 7%;
+	font-size: x-large;
+	font-weight: 100;
 }
 
 
@@ -62,7 +70,12 @@ header {
 #search-title{
 	font-size: xx-large;
 	color:black;
-	font-weight: normal;
+	font-weight: lighter;
+
+}
+
+#bookDisplay {
+	
 }
 
 
@@ -85,7 +98,63 @@ input {
 p {
 	font-size: medium;
 	margin: 10px;
+	width: 20%;
 }
 
+.bookInfo {
+	font-size: medium;
+	margin: 10px;
+	width: 20%;
+}
+
+.basicInfo {
+	font-size: medium;
+	margin: 10px;
+}
+
+
+
+
+
+
+.overlay_base {
+    display: none; /* Start out hidden, we'll dynamically enable it later. */
+
+    /* Full-window container ... */
+    position: fixed; 
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* ... floating above everything else ... */
+    z-index: 2;
+
+    /* ... with partial transparency, 
+           to make everything else look greyed out */
+    background-color: rgba(0,0,0,0.5);
+
+    /* Flex options for child objects */
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay_inner {
+    width: 50%;
+    height: 50%;
+    background-color: rgb(255,255,255); /* Must set the background color here, 
+				otherwise it inherits from the parent */
+    position: relative;
+}
+
+/* Not covered in Discussion: force the close button into
+              the upper-right corner of it's parent container */
+.overlay_button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
 
 

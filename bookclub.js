@@ -78,3 +78,13 @@ function handleResponse(bookListObj) {
 
 
 }
+
+function ShowOverlay() {
+    document.getElementById("overlay").style.display = "flex";
+}
+
+function HideOverlay() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+
