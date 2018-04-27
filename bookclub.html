@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="reset.css">
 <link rel="stylesheet" type="text/css" href="bookclub.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet"> 
 </head>
 
 <body>
@@ -16,29 +16,59 @@
 </header>
 
 <div class="overlay_base" id="overlay">
+	 <button class="overlay_button" type="button" onClick="HideOverlay();">X</button>
+	<a class="prev" onclick="overlayDialogLeft();">&#10094;</a>
+  	<a class="next" onclick="overlayDialogRight();">&#10095;</a>
+  	
     <div class="overlay_inner">
-        <button class="overlay_button" type="button" onClick="HideOverlay();">X</button>
         <div id="bookDisplay">
-	</div>
+		</div>	
     </div>
+
+    <button id="keepButton" type="button" onClick="saveTile();">Keep</button>
 </div>
 
 
-<main>
+<main id="backgroundColor">
+	<!-- <div class="background" id="backgroundColor"> -->
 	<div id="search-field">
 		<h2 id="search-title"> Search for a book...</h2>
 	</div>
-	<div class="input-info">	
-		<div class="field-item"> <h1 class="boxHeader">Author</h1> <input id="author" placeholder="ex William Shakespeare"> </div>
-		<div class="field-item"> <h1 class="boxHeader"">Title</h1> <input id="title" placeholder="ex Romeo and Juliet"> </div>
-		<div class="field-item"> <h1 class="boxHeader">ISBN</h1> <input id="isbn" placeholder="ex 000-0-00-000000-0"> </div>
+	<div class="input-info" id="input-info-id">	
+		<div class="field-item"> 
+			<h1 class="boxHeader">Author</h1> 
+			<input id="author" placeholder="ex William Shakespeare"> 
+			
+		</div>
+		
+		<div class="orSeperator"> <h4>or</h4> </div>
+
+		<div class="field-item"> 
+			<h1 class="boxHeader"">Title</h1> 
+			<input id="title" placeholder="ex Romeo and Juliet"> 
+			<!-- <div class="orSeperator"> <h4>or</h4> </div> -->
+		</div>
+
+		<div class="orSeperator"> <h4>or</h4> </div>
+
+		<div class="field-item"> 
+			<h1 class="boxHeader">ISBN</h1> 
+			<input id="isbn" placeholder="ex 000-0-00-000000-0"> </div>
 	</div>
 
-	<div class="search-button">
-		<button id=button onclick="newRequest(); ShowOverlay();">Search</button>
+	<div id=bottomBody>
+
+	<div class="search-button" id="searchButton">
+		<button id=button onclick="newRequest(); ShowOverlay(); changeHeader();">Search</button>
+	</div>
+    </div>
+
+	<div id="tilesBigBox">
+		
+    <!-- <button id="removeTile" type="button" onClick="removeTile();">X</button> -->
 	</div>
 
-	
+	<!-- </div> -->
 
 </main>
 
