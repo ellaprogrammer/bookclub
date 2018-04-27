@@ -9,34 +9,135 @@ body {
 	color: blue;
 }
 
+#backgroundColor {
+	height: 100%;
+}
+
 header {
     text-align: left;
     padding: 4%;
-    padding-bottom: 9%;
+    padding-bottom: 1%;
     padding-left: 3%;
 }
 
-.or-separator{
-	color:#4A73FF;
+#bookDisplay {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	/*flex-wrap: wrap;*/
+}
+
+#book0, #book1, #book2, #book3, #book4, #book5, #book6, #book7, #book8, #book9 {
+	padding: 2%;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+
+}
+
+#clone0, #clone1, #clone2, #clone3, #clone4, #clone5, #clone6, #clone7, #clone8, #clone9 {
+	padding: 2%;
+	display: flex;
+	flex-direction: row;
+	max-height: 30%;
+	max-width: 40%;
+	margin: 2%;
+	background-color: white;
+	box-shadow: 10px 10px 5px #D0D0D0;
+
+}
+
+#tileL0, #tileL1, #tileL2, #tileL3, #tileL4, #tileL5, #tileL6, #tileL7, #tileL8, #tileL9 {
+	width: 50%;
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#tileR0, #tileR1, #tileR2, #tileR3, #tileR4, #tileR5, #tileR6, #tileR7, #tileR8, #tileR9 {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#bookImg {
+	width: 100%;
+	height: 70%; /*FIXME (LARGE SCREEN)*/
+	max-height: 300px;
+	min-height: 200px;
+    min-width: 200px;
+	
+}
+
+.individualBook {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap-reverse;
+	background-color: white;
+
+}
+
+#author, #title, #isbn {
+	height: 50px;
+	width: 125%;
+}
+
+.imgClass {
+	width: 80%;
+	height: auto;
+}
+
+.titleClass, .authClass, .descClass {
+	color: black;
+	width: 100%;
+	padding: 3%;
+	font-family: 'Roboto', sans-serif;
+}
+
+.titleClass {
+	font-size: x-large;
+    font-weight: bold;
+}
+
+.authClass {
 	font-size: large;
+}
+
+#tilesBigBox{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	color: grey;
+}
+
+.orSeperator{
+	color:#4A73FF;
+	font-size: x-large;
 	font-weight: bold;
+	padding-right: .7%;
+	padding-left: 2.3%;
 }
 
 #search-field {
 	padding: 10%;
-	padding-top: 0;
-	padding-bottom: 5%;
+	padding-top: 7%;
+	padding-bottom: 3%;
 }
 
 .input-info {
 	display: flex;
     justify-content: center;
     padding-bottom: 6%;
+    align-items: center;
     }
 
 .search-button {
 	display: flex;
 	justify-content: center;
+	
 }
 
 #button {
@@ -47,17 +148,23 @@ header {
 	padding-right: 3%;
 	padding-left: 3%;
 	font-size: 120%; 
+
 }
 
 .field-item{
 	padding-right: 2%;
+
+	margin: 3%; 
 }
 
 .boxHeader {
+	display: flex;
+    justify-content: left;
+    padding-left: 6%;
 	color:#4A73FF;
 	padding-bottom: 7%;
 	font-size: x-large;
-	font-weight: 100;
+	font-weight: lighter;
 }
 
 
@@ -74,10 +181,6 @@ header {
 
 }
 
-#bookDisplay {
-	
-}
-
 
 main {
      flex: 1 0 auto;  /* the sticky footer trick without the footer */
@@ -91,8 +194,8 @@ input {
 	border-style: solid;
 	border-radius: 10px;
 	font-size: medium;
-	height: 80%;
 	border-color: #4A73FF;
+	/*border-width: thin;*/
 }
 
 p {
@@ -113,9 +216,29 @@ p {
 }
 
 
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
 
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
 
-
+.prev {
+	left: 0;
+	border-radius: 3px 0 0 3px;
+}
 
 .overlay_base {
     display: none; /* Start out hidden, we'll dynamically enable it later. */
@@ -147,6 +270,8 @@ p {
     background-color: rgb(255,255,255); /* Must set the background color here, 
 				otherwise it inherits from the parent */
     position: relative;
+    display: flex;
+    flex-direction: row;
 }
 
 /* Not covered in Discussion: force the close button into
@@ -156,5 +281,111 @@ p {
     top: 0px;
     right: 0px;
 }
+
+#keepButton {
+	color:black;
+	background-color: #4A73FF;
+	border-radius: 10px;
+	padding: 1.2%;
+	padding-right: 3%;
+	padding-left: 3%;
+	font-size: 100%; 
+	position: absolute;
+	bottom:15%;
+	left: 45%;
+	margin: auto;
+	color: #FFFFFF;
+}
+
+#delButton {
+	color:black;
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	padding: 1.2%;
+	padding-right: 3%;
+	padding-left: 3%;
+	font-size: 100%; 
+}
+
+.deleteTileButt{
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  float: left;
+  height: 16px;
+  margin: -10px;
+  position: relative;
+  width: 20px;
+}
+
+@media (max-width: 480px){
+	.input-info {
+		flex-direction: column;
+		align-items: center;
+	}
+	.boxHeader {
+		padding-bottom: 4%;
+	}
+	.field-item {
+		width: 90%;
+		padding: 2% 3% 4% 3%;
+		align-items: center;
+		align-content: center;
+		margin: 0;
+	}
+	.authClass, #author {
+		font-size: x-large;
+		height: 50px;
+		width: 100%;
+	}
+
+	.titleClass, #title {
+		font-size: x-large;
+		height: 50px;
+		width: 100%;
+	}
+
+	#isbn {
+		font-size: x-large;
+		height: 50px;
+		width: 100%;
+	}
+
+	#search-title {
+		font-size: x-large;
+		padding-top: 0%;
+	}
+
+	#header-title {
+		display: flex;
+		justify-content: center;
+		padding-bottom: 12%;
+		padding-top: 3%;
+		font-size: 250%;
+	}
+
+	.orSeperator {
+
+	}
+
+	#bottomBody {
+		display: flex;
+    	justify-content: center;
+	}
+
+	#button {
+		width: 370px;
+		height: 50px;
+	}
+
+	#searchButton {
+		padding-left: 2%;
+	}
+	#search-field {
+		padding-bottom: 7%;
+	}
+
+}
+
 
 
