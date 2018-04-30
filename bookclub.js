@@ -1,5 +1,5 @@
 
-var slideCount = 0;
+var numTiles = 0;
 var bookListVar = null;
 
 function mobileV(mobile){
@@ -60,10 +60,43 @@ function handleResponse(bookListObj) {
 	var bookDisplay = document.getElementById("bookDisplay");
 
 	if (bookList == null) {
+		document.getElementById("overlay_inner").style.display = "none";
+		//document.getElementById("overlay_button").style.display = "none";
+		document.getElementById("prev").style.display = "none";
+		document.getElementById("next").style.display = "none";
+		document.getElementById("keepButton").style.display = "none";
+		var bookDisplay1 = document.getElementById("overlay");
 		var err = document.createElement("div");
-		err="The book TITLE by AUTHOR or ISBN number 000-0-00-000000-0 Could not be found. Try another search";
+		err.style.display = "flex";
+		err.style.flexDirection = "column";
+		var divT = document.createElement("div");
+		var divTT = document.createElement("div");
+		divTT.id = "notFoundDiv";
+		var t = document.createTextNode("The book TITLE by AUTHOR or ISBN number 000-0-00-000000-0 Could not be found.");
+		var tt = document.createTextNode("Try another search");
+		divT.appendChild(t);
+		divTT.appendChild(tt);
+		err.appendChild(divT);
+		err.appendChild(divTT);
 		err.id = "noResults";
-		bookDisplay.append(err);
+		bookDisplay1.append(err);
+
+		//create OK button that refreshes the search
+		var okButt = document.createElement("button");
+		okButt.id = "okButt";
+		okButt.onclick = function() {
+    		bookDisplay1.removeChild(bookDisplay1.lastChild);
+    		document.getElementById("overlay").style.display = "none";
+			//document.getElementById("overlay_button").style.display = "flex";
+    		document.getElementById("overlay_inner").style.display = "flex";
+			document.getElementById("prev").style.display = "flex";
+			document.getElementById("next").style.display = "flex";
+			document.getElementById("keepButton").style.display = "flex";
+		} //need to clear the query so we can research fixed
+		var text = document.createTextNode("OK");
+		err.appendChild(okButt);
+
+
 	}
 	
 	for (i=0; i<bookList.length; i++) {
@@ -103,7 +136,7 @@ function handleResponse(bookListObj) {
 			descPgh.append(description);
 		}
     	else{
-    		description = description.split(" ").slice(0,30).join(" ");
+    		description = description.split(" ").slice(0,15).join(" ");
     		descPgh.append(description + "...");
     	}
     	
@@ -151,70 +184,64 @@ function handleResponse(bookListObj) {
 }
 
 	function deleteTile(){
-		var tile = document.getElementById("clone" + (slideCount-1)); 
+		var tile = document.getElementById("clone" + (numTiles-1)); 
 		tile.style.display = "none";
-		slideCount--;
+		numTiles--;
 	}
-
-// function deleteTile(){
-// 	document.getElementById("book" + currentBook).style.display = "none";
-// }
-
-// function deleteTile() {
-// 	// var parent = document.getElementById("tilesBigBox");
-// 	// var child = document.getElementById("individual-book");
-// 	// parent.removeChild(child);
-	
-// 	var clone = getElementById("individual-book");
-// 	clone.style.display = "none";
-// };
-
-// function disappear() {
-// 	var bookDiv = document.getElementById("clone" + currentBook);
-// 	bookDiv.style.display = "none";
-// }
 
 
 function saveTile(){
 
+
+	//before making the clone make the pic smaller
+
+	document.getElementById("bookImg").style.minWidth = "140px";
+	document.getElementById("bookImg").style.minHeight = "250px";
 	document.getElementById("search-field").style.padding = "0px 0px 0px 0px";
 	document.getElementById("header-title").style.height = "120px"
+	document.getElementById("author").style.fontFamily = "Roboto,sans-serif";
+	document.getElementById("title").style.fontFamily = "Roboto,sans-serif";
+	document.getElementById("isbn").style.fontFamily = "Roboto,sans-serif";
 
 	var book = document.getElementById("book" + currentBook); 
 	var books = document.getElementById("tilesBigBox");
+	//make a different bookImg
 
-    var clone = book.cloneNode(true); 
-  	clone.id = "clone" + slideCount;
-  	
+	if(numTiles>9){
+		return;
+	}
 
-  	document.getElementById("backgroundColor").style.backgroundColor = "#DCDCDC";
-  	
-  	var keepButton = document.createElement("button"); 
-    keepButton.id = currentBook; 
-    keepButton.className = "deleteTileButt";
-    keepButton.onclick = deleteTile; //slideCount clone
+	else{
+		    var clone = book.cloneNode(true); 
+	  	clone.id = "clone" + numTiles;
+	  	
 
-    var t = document.createTextNode("X");
-	keepButton.appendChild(t); 
-    clone.append(keepButton); 
+	  	document.getElementById("backgroundColor").style.backgroundColor = "#DCDCDC";
+	  	
+	  	var keepButton = document.createElement("button"); 
+	    keepButton.id = currentBook; 
+	    keepButton.className = "deleteTileButt";
+	    keepButton.onclick = deleteTile; //numTiles clone
 
-    slideCount++;
+	    var t = document.createTextNode("X"); //&#9447;
+		keepButton.appendChild(t); 
+	    clone.append(keepButton); 
 
+	    numTiles++;
 
-    // delButton.onclick = function() {
-    // 	document.getElementById("clone"+currentBook).style.display = "none";
-    // }
+		books.appendChild(clone);
+		HideOverlay();
 
- //    var delButton = document.createElement("button"); 
- //    delButton.id = "delButton";
+		var w = parseInt(window.innerWidth);
 
- //    var t = document.createTextNode("Remove from my Books");
-	// delButton.appendChild(t); 
- //    document.getElementById("book" + currentBook).append(delButton); 
+	    if(w <= 500) { //FIXME: adds a button for each search
+	    	//add search button
+	    	addSearch();
+	    	//add search button functionality
+	    	return;
+	    }
+	}
 
-	books.appendChild(clone);
-	HideOverlay();
-    //delButton.onclick = disappear;
 
 }
 
@@ -263,14 +290,43 @@ function overlayDialogLeft() {
 	}
 }
 
+function showHeader(){
+	document.getElementById("input-info-id").style.display = "flex";
+	document.getElementById("button").style.display = "flex";
+	document.getElementById("search-title").style.display = "flex";
+	document.getElementById("header-title").style.paddingBottom = "0px"; //fixme
+
+	document.getElementById("backgroundColor").style.backgroundColor = "white";
+
+}
+
+function hideHeader(){
+	document.getElementById("input-info-id").style.display = "none";
+	document.getElementById("button").style.display = "none";
+	document.getElementById("search-title").style.display = "none";
+	document.getElementById("header-title").style.paddingBottom = "0px";
+}
+
+function addSearch(){
+	var buttonSearch = document.createElement("button");
+	buttonSearch.id = 'buttonMagGlass';
+	buttonSearch.onclick = showHeader;
+	var header = document.getElementById("header-title");
+	header.append(buttonSearch);
+}
+
 function changeHeader(){
 
 	var w = parseInt(window.innerWidth);
 
     if(w <= 500) {
+    	//call hideHeader function
+    	hideHeader();
+    	//addSearch();
     	return;
     }
-
+    document.getElementById("or-Seperator").style.display = "none";
+    document.getElementById("or-Seperator1").style.display = "none";
 	document.getElementById("search-field").style.padding = "0px 0px 0px 0px";
 	document.getElementById("header-title").style.height = "120px"
 
@@ -284,6 +340,7 @@ function changeHeader(){
 	document.getElementById("header-title").style.display = "flex";
 	document.getElementById("header-title").style.justifyContent = "space-between";
 	document.getElementById("input-info-id").style.justifyContent = "space-between";
+	//document.getElementsByClassName("input-info").style.justifyContent = "space-between";
 	//document.getElementById("input-info-id").style.align = "right"; //doesnt work
 	document.getElementById("button").style.fontSize="70%";
 	document.getElementById("button").style.width="100%";
@@ -294,5 +351,3 @@ function changeHeader(){
 	//document.getElementById("searchButton").style.height="30%";
 
 }
-
-
