@@ -9,6 +9,23 @@ body {
 	color: blue;
 }
 
+#okButt {
+	width: 10%;
+}
+
+#notFoundDiv {
+	padding-top: 7%;
+}
+
+#noResults {
+	font-size: xx-large;
+    color: white;
+    padding: 20%;
+    line-height: 70px;
+    text-align: center;
+    align-items: center;
+}
+
 #backgroundColor {
 	height: 100%;
 }
@@ -18,6 +35,11 @@ header {
     padding: 4%;
     padding-bottom: 1%;
     padding-left: 3%;
+}
+
+#buttonMagGlass {
+	height: 30px;
+    width: 30px;
 }
 
 #bookDisplay {
@@ -36,14 +58,16 @@ header {
 }
 
 #clone0, #clone1, #clone2, #clone3, #clone4, #clone5, #clone6, #clone7, #clone8, #clone9 {
-	padding: 2%;
+	/*padding: 2%;*/
 	display: flex;
 	flex-direction: row;
-	max-height: 30%;
-	max-width: 40%;
+	max-height: 10%;
+	max-width: 25%;
 	margin: 2%;
 	background-color: white;
 	box-shadow: 10px 10px 5px #D0D0D0;
+	min-height: 300px;
+    min-width: 370px;
 
 }
 
@@ -61,14 +85,20 @@ header {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	padding: 7%;
+	min-width: 140px;
 }
 
 #bookImg {
-	width: 100%;
-	height: 70%; /*FIXME (LARGE SCREEN)*/
-	max-height: 300px;
-	min-height: 200px;
+	width: 70%;
+    height: 70%;
+    max-height: 300px; /*lower these for the clones*/
+    min-height: 300px;
     min-width: 200px;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-right: 7%;
+    padding-left: 4%;
 	
 }
 
@@ -82,11 +112,11 @@ header {
 
 #author, #title, #isbn {
 	height: 50px;
-	width: 125%;
+	width: 160%;
 }
 
 .imgClass {
-	width: 80%;
+	/*width: 80%;*/
 	height: auto;
 }
 
@@ -95,6 +125,10 @@ header {
 	width: 100%;
 	padding: 3%;
 	font-family: 'Roboto', sans-serif;
+}
+
+.authClass {
+	padding-bottom: 10%;
 }
 
 .titleClass {
@@ -117,8 +151,7 @@ header {
 	color:#4A73FF;
 	font-size: x-large;
 	font-weight: bold;
-	padding-right: .7%;
-	padding-left: 2.3%;
+	padding-left: 7%;
 }
 
 #search-field {
@@ -178,6 +211,7 @@ header {
 	font-size: xx-large;
 	color:black;
 	font-weight: lighter;
+	padding: 0;
 
 }
 
@@ -216,29 +250,23 @@ p {
 }
 
 
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+ .prev, .next {
+	background-color: rgba(76,76,76);
+	color:white;
+	border-radius: 10px;
+	border-color: white;
+	position: relative;
+	left:0%;
+	right: 0%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+.arrows{
+	font-size: xx-large;
+	font-weight: bolder;
 }
 
-.prev {
-	left: 0;
-	border-radius: 3px 0 0 3px;
-}
 
 .overlay_base {
     display: none; /* Start out hidden, we'll dynamically enable it later. */
@@ -257,7 +285,7 @@ p {
 
     /* ... with partial transparency, 
            to make everything else look greyed out */
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.7);
 
     /* Flex options for child objects */
     align-items: center;
@@ -265,7 +293,7 @@ p {
 }
 
 .overlay_inner {
-    width: 50%;
+    width: 40%;
     height: 50%;
     background-color: rgb(255,255,255); /* Must set the background color here, 
 				otherwise it inherits from the parent */
@@ -277,9 +305,15 @@ p {
 /* Not covered in Discussion: force the close button into
               the upper-right corner of it's parent container */
 .overlay_button {
+
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 3%;
+    right: 5%;
+    background-color: rgba(76,76,76,1);
+	color:white;
+	font-size: 175%;
+	border-radius: 50%;
+
 }
 
 #keepButton {
@@ -310,12 +344,17 @@ p {
 .deleteTileButt{
   background: #ddd;
   border: 1px solid #ccc;
-  border-radius: 5px;
   float: left;
-  height: 16px;
-  margin: -10px;
+  height: 8%;
+  /*margin: -10px;*/
   position: relative;
-  width: 20px;
+  width: -5%;
+  background-color: white;
+  border-radius: 50%;
+  border-color: rgb(80,80,80);
+  font-size: 86%;
+  top:3%;
+  right:4%;
 }
 
 @media (max-width: 480px){
@@ -333,13 +372,25 @@ p {
 		align-content: center;
 		margin: 0;
 	}
-	.authClass, #author {
+	.authClass {
+		font-size: x-large;
+		height: 30%;
+		width: 100%;
+	}
+
+	#author {
 		font-size: x-large;
 		height: 50px;
 		width: 100%;
 	}
 
-	.titleClass, #title {
+	.titleClass {
+		font-size: x-large;
+		height: 38%;
+		width: 100%;
+	}
+
+	#title {
 		font-size: x-large;
 		height: 50px;
 		width: 100%;
@@ -354,6 +405,7 @@ p {
 	#search-title {
 		font-size: x-large;
 		padding-top: 0%;
+   		padding-bottom: 5%;
 	}
 
 	#header-title {
@@ -385,6 +437,22 @@ p {
 		padding-bottom: 7%;
 	}
 
+	.overlay_inner {
+    	width: 83%;
+    	height: 50%;
+	}
+
+	#tileR0, #tileR1, #tileR2, #tileR3, #tileR4, #tileR5, #tileR6, #tileR7, #tileR8, #tileR9 {
+		padding: 9%;
+	}
+
+	#background-color {
+		   background-color: rgb(235, 235, 235);
+	}
+
+	#tilesBigBox {
+    	justify-content: center;
+	}
 }
 
 
