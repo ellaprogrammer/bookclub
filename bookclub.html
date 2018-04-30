@@ -14,19 +14,20 @@
 <header>
 	<h1 id="header-title">BOOK CLUB</h1>
 </header>
-
 <div class="overlay_base" id="overlay">
-	 <button class="overlay_button" type="button" onClick="HideOverlay();">X</button>
-	<a class="prev" onclick="overlayDialogLeft();">&#10094;</a>
-  	<a class="next" onclick="overlayDialogRight();">&#10095;</a>
+
+	<button class="overlay_button" type="button" onClick="HideOverlay();">X</button>
+	<button class="prev" type="button" onclick="overlayDialogLeft();"><p class="arrows">&xlarr;</p></button>
   	
-    <div class="overlay_inner">
+    <div class="overlay_inner" id="overlay_inner">
         <div id="bookDisplay">
 		</div>	
-    </div>
 
+    </div>
+	<button class="next" type="button" onclick="overlayDialogRight();"><p class="arrows">&xrarr;</p></button>
     <button id="keepButton" type="button" onClick="saveTile();">Keep</button>
 </div>
+
 
 
 <main id="backgroundColor">
@@ -41,7 +42,7 @@
 			
 		</div>
 		
-		<div class="orSeperator"> <h4>or</h4> </div>
+		<div class="orSeperator"> <h4 id="or-Seperator">or</h4> </div>
 
 		<div class="field-item"> 
 			<h1 class="boxHeader"">Title</h1> 
@@ -49,7 +50,7 @@
 			<!-- <div class="orSeperator"> <h4>or</h4> </div> -->
 		</div>
 
-		<div class="orSeperator"> <h4>or</h4> </div>
+		<div class="orSeperator"> <h4 id="or-Seperator1">or</h4> </div>
 
 		<div class="field-item"> 
 			<h1 class="boxHeader">ISBN</h1> 
