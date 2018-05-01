@@ -1,5 +1,4 @@
 var numTiles = 0;
-var currentBook = 0;
 var bookListVar = null;
 
 function mobileV(mobile){
@@ -55,14 +54,52 @@ function newRequest() {
 function handleResponse(bookListObj) {
 	var bookList = bookListObj.items;
 
-	//console.log(bookListObj);
+	console.log(bookListObj);
 
 	var bookDisplay = document.getElementById("bookDisplay");
 
 	if (bookList == null) {
-		this.openErrDisplay();
-		return;
+		document.getElementById("overlay_inner").style.display = "none";
+		document.getElementById("overlay_button").style.display = "none";
+		document.getElementById("prev").style.display = "none";
+		document.getElementById("next").style.display = "none";
+		document.getElementById("keepButton").style.display = "none";
+		var bookDisplay1 = document.getElementById("overlay");
+		var err = document.createElement("div");
+		err.style.display = "flex";
+		err.style.flexDirection = "column";
+		var divT = document.createElement("div");
+		var divTT = document.createElement("div");
+		divTT.id = "notFoundDiv";
+		var t = document.createTextNode("The book TITLE by AUTHOR or ISBN number 000-0-00-000000-0 Could not be found.");
+		var tt = document.createTextNode("Try another search");
+		divT.appendChild(t);
+		divTT.appendChild(tt);
+		err.appendChild(divT);
+		err.appendChild(divTT);
+		err.id = "noResults";
+		bookDisplay1.appendChild(err);
+
+		//create OK button that refreshes the search
+		var okButt = document.createElement("button");
+		okButt.id = "okButt";
+		okButt.onclick = function() {
+    		bookDisplay1.removeChild(bookDisplay1.lastChild);
+    		document.getElementById("overlay").style.display = "none";
+			document.getElementById("overlay_button").style.display = "flex";
+    		document.getElementById("overlay_inner").style.display = "flex";
+			document.getElementById("prev").style.display = "flex";
+			document.getElementById("next").style.display = "flex";
+			document.getElementById("keepButton").style.display = "flex";
+			bookDisplay1.removeChild(err);
+		} //need to clear the query so we can research fixed
+		var text = document.createTextNode("OK");
+		err.appendChild(okButt);
+
+
 	}
+
+
 	
 	for (i=0; i<bookList.length; i++) {
 		var book = bookList[i];
@@ -105,6 +142,7 @@ function handleResponse(bookListObj) {
     		descPgh.append(description + "...");
     	}
     	
+
     	// var oneTile = document.createElement("div");
     	// oneTile.id = "oneTile" + i;
     	// bookDisplay.append(oneTile);
@@ -143,38 +181,12 @@ function handleResponse(bookListObj) {
     	if(i != 0)
     		document.getElementById("book" + i).style.display = "none";
 
-	}	
-
+	}	//end of for loop
 }
-
-// function deleteTile(){
-// 	document.getElementById("book" + currentBook).style.display = "none";
-// }
-
-// function deleteTile() {
-// 	// var parent = document.getElementById("tilesBigBox");
-// 	// var child = document.getElementById("individual-book");
-// 	// parent.removeChild(child);
-	
-// 	var clone = getElementById("individual-book");
-// 	clone.style.display = "none";
-// };
-
-// function disappear() {
-// 	var bookDiv = document.getElementById("clone" + currentBook);
-// 	bookDiv.style.display = "none";
-// }
 
 
 function saveTile(){
 
-	var w = parseInt(window.innerWidth);
-
-    if(w <= 500) {
-    	//add search button
-    	//add search button functionality
-    	return;
-    }
 
 	//before making the clone make the pic smaller
 
@@ -188,93 +200,49 @@ function saveTile(){
 
 	var book = document.getElementById("book" + currentBook); 
 	var books = document.getElementById("tilesBigBox");
+	//make a different bookImg
 
-	if(numTiles>10){
+	if(numTiles>9){
 		return;
 	}
-	else {
-	    var clone = book.cloneNode(true); 
+
+	else{
+		var clone = book.cloneNode(true); 
 	  	clone.id = "clone" + numTiles;
-	  
+	  	
+
 	  	document.getElementById("backgroundColor").style.backgroundColor = "#DCDCDC";
 	  	
 	  	var keepButton = document.createElement("button"); 
 	    keepButton.id = currentBook; 
 	    keepButton.className = "deleteTileButt";
-	    num=clone.id;
-	    //console.log("DELETE THIS ID"+num);
-	    //keepButton.displayMain(); //slideCount clone
-
-	    keepButton.onclick=removeTile;
+	    keepButton.onclick = function (){ clone.style.display = "none"; }; 
 
 	    var t = document.createTextNode("X"); //&#9447;
-	    console.log(keepButton);
-	    //t.onclick=removeTile(num);
 		keepButton.appendChild(t); 
 	    clone.append(keepButton); 
 
 	    numTiles++;
+
 		books.appendChild(clone);
 		HideOverlay();
-		displayMain();
+
+		var w = parseInt(window.innerWidth);
+
+	    if(w <= 500) { //FIXME: adds a button for each search
+	    	//add search button
+	    	addSearch();
+	    	//add search button functionality
+	    	return;
+	    }
 	}
+
+
 }
 
-function removeTile(){
-	//  if(numTiles==1){ //num == "clone0"
-	//  	var buttonId = document.getElementById("clone1"); 
-	// 	var trueNum = num.substr(5);
-	// 	trueNum--;
-	// 	num = "clone" + trueNum;
-	// }
-
-	console.log("delete "+ num);
-	//var buttonNum = document.querySelector();
-	var removeMeToo = document.querySelector("div#"+num+".individual-book"); 
-	console.log(removeMeToo);
-	removeMeToo.style.display="none";
-	numTiles--;
-}
-
-function displayMain(){
-		var tile = document.getElementById("clone" + (numTiles-1)); 
-		//tile.style.display = "none";
-}
-
-function save(){
-	var keepButton = document.createElement("button"); 
- 	keepButton.id = currentBook; 
-    keepButton.className = "deleteTileButt";
-    keepButton.onclick = deleteTile; //slideCount clone
-
-    var t = document.createTextNode("X"); //&#9447;
-	keepButton.appendChild(t); 
-    clone.append(keepButton); 
-
-    numTiles++;
-	books.appendChild(clone);
-	HideOverlay();
-}
-
-
-// function deleteTile(clicked_id) {
-// 	console.log("NEW FUNCTION "+clicked_id);
-// }
 
 function ShowOverlay() {
     document.getElementById("overlay").style.display = "flex";
-}
-
-function openErrDisplay(){
-	document.getElementById("overlayE").style.display = "flex";
-	document.getElementById("keepButton").style.display = "none";
-	console.log("succeess");
-	// document.getElementById("left").style.display = "none";
-	// document.getElementById("right").style.display = "none";
-
-
-	err="The book TITLE by AUTHOR or ISBN number 000-0-00-000000-0 Could not be found. Try another search";
-	bookDisplay.append(err);
 
 }
 
@@ -287,6 +255,8 @@ function HideOverlay() {
     document.getElementById("overlay").style.display = "none";
     currentBook = 0;
 }
+
+var currentBook = 0;
 
 function overlayDialogRight() {
 	var bookDisplay = document.getElementById("bookDisplay");
@@ -320,6 +290,9 @@ function showHeader(){
 	document.getElementById("button").style.display = "flex";
 	document.getElementById("search-title").style.display = "flex";
 	document.getElementById("header-title").style.paddingBottom = "0px"; //fixme
+
+	document.getElementById("backgroundColor").style.backgroundColor = "white";
+
 }
 
 function hideHeader(){
@@ -329,6 +302,17 @@ function hideHeader(){
 	document.getElementById("header-title").style.paddingBottom = "0px";
 }
 
+function addSearch(){
+	if(numTiles>1) { //ADDED
+		return;
+	}
+	var buttonSearch = document.createElement("button");
+	buttonSearch.id = 'buttonMagGlass';
+	buttonSearch.onclick = showHeader;
+	var header = document.getElementById("header-title");
+	header.append(buttonSearch);
+}
+
 function changeHeader(){
 
 	var w = parseInt(window.innerWidth);
@@ -336,13 +320,14 @@ function changeHeader(){
     if(w <= 500) {
     	//call hideHeader function
     	hideHeader();
+    	//addSearch();
     	return;
     }
-
     document.getElementById("or-Seperator").style.display = "none";
     document.getElementById("or-Seperator1").style.display = "none";
 	document.getElementById("search-field").style.padding = "0px 0px 0px 0px";
 	document.getElementById("header-title").style.height = "120px"
+
 
 	document.getElementById("search-title").style.display = "none";
 	var headerT = document.getElementById("header-title");
