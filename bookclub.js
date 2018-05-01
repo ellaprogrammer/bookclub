@@ -61,7 +61,7 @@ function handleResponse(bookListObj) {
 
 	if (bookList == null) {
 		document.getElementById("overlay_inner").style.display = "none";
-		//document.getElementById("overlay_button").style.display = "none";
+		document.getElementById("overlay_button").style.display = "none";
 		document.getElementById("prev").style.display = "none";
 		document.getElementById("next").style.display = "none";
 		document.getElementById("keepButton").style.display = "none";
@@ -87,17 +87,27 @@ function handleResponse(bookListObj) {
 		okButt.onclick = function() {
     		bookDisplay1.removeChild(bookDisplay1.lastChild);
     		document.getElementById("overlay").style.display = "none";
-			//document.getElementById("overlay_button").style.display = "flex";
+			document.getElementById("overlay_button").style.display = "flex";
     		document.getElementById("overlay_inner").style.display = "flex";
 			document.getElementById("prev").style.display = "flex";
 			document.getElementById("next").style.display = "flex";
 			document.getElementById("keepButton").style.display = "flex";
+			bookDisplay1.remove(err);
+
+			var w = parseInt(window.innerWidth);
+			if (w <= 500) {
+				showHeader();
+			}
+
 		} //need to clear the query so we can research fixed
 		var text = document.createTextNode("OK");
+		okButt.append(text); ///ADDED!!!!!!
 		err.appendChild(okButt);
-
+		return;
 
 	}
+
+
 	
 	for (i=0; i<bookList.length; i++) {
 		var book = bookList[i];
@@ -119,8 +129,7 @@ function handleResponse(bookListObj) {
 			authPgh.append("by " + author);
 		}
 		
-		
-
+	
 		var image = book.volumeInfo.imageLinks.smallThumbnail;
 		var img = new Image();
 		img.id = "bookImg";
@@ -148,6 +157,7 @@ function handleResponse(bookListObj) {
 		var bookDiv = document.createElement("div");
     	bookDiv.id = "book" + i;
     	bookDiv.className = "individual-book";
+
     	bookDisplay.append(bookDiv);
 
     	var bookTile = document.createElement("div");
@@ -176,18 +186,14 @@ function handleResponse(bookListObj) {
   //   	document.getElementById("book" + i).append(keepButton); 
     	
 
-    	if(i != 0)
+    	if(i != 0){
     		document.getElementById("book" + i).style.display = "none";
+    	}
 
-	}	
-
-}
-
-	function deleteTile(){
-		var tile = document.getElementById("clone" + (numTiles-1)); 
-		tile.style.display = "none";
-		numTiles--;
 	}
+} 
+	
+
 
 
 function saveTile(){
@@ -198,7 +204,13 @@ function saveTile(){
 	document.getElementById("bookImg").style.minWidth = "140px";
 	document.getElementById("bookImg").style.minHeight = "250px";
 	document.getElementById("search-field").style.padding = "0px 0px 0px 0px";
-	document.getElementById("header-title").style.height = "120px"
+	var w = parseInt(window.innerWidth);
+		if (w <= 500) {	
+			document.getElementById("header-title").style.height = "60px"
+		}
+		else{
+			document.getElementById("header-title").style.height = "120px"
+		}
 	document.getElementById("author").style.fontFamily = "Roboto,sans-serif";
 	document.getElementById("title").style.fontFamily = "Roboto,sans-serif";
 	document.getElementById("isbn").style.fontFamily = "Roboto,sans-serif";
@@ -212,7 +224,7 @@ function saveTile(){
 	}
 
 	else{
-		    var clone = book.cloneNode(true); 
+		var clone = book.cloneNode(true); 
 	  	clone.id = "clone" + numTiles;
 	  	
 
@@ -221,7 +233,7 @@ function saveTile(){
 	  	var keepButton = document.createElement("button"); 
 	    keepButton.id = currentBook; 
 	    keepButton.className = "deleteTileButt";
-	    keepButton.onclick = deleteTile; //numTiles clone
+	    keepButton.onclick = function (){ clone.style.display = "none"; }; 
 
 	    var t = document.createTextNode("X"); //&#9447;
 		keepButton.appendChild(t); 
@@ -237,6 +249,7 @@ function saveTile(){
 	    if(w <= 500) { //FIXME: adds a button for each search
 	    	//add search button
 	    	addSearch();
+	    	changeHeader();
 	    	//add search button functionality
 	    	return;
 	    }
@@ -308,9 +321,22 @@ function hideHeader(){
 }
 
 function addSearch(){
+
+
+	if(numTiles>1) { //ADDED
+		return;
+  	}
 	var buttonSearch = document.createElement("button");
+	//buttonSearch.className = "btn btn-default btn-sm";
+	//var spanEl = document.createElement("span");
+	//spanEl.className="glyphicon glyphicon-search";
 	buttonSearch.id = 'buttonMagGlass';
 	buttonSearch.onclick = showHeader;
+
+	var t = document.createTextNode("\u2315");
+	t.id = "magGlass";
+	buttonSearch.append(t);
+	//buttonSearch.append(spanEl);
 	var header = document.getElementById("header-title");
 	header.append(buttonSearch);
 }
@@ -328,7 +354,7 @@ function changeHeader(){
     document.getElementById("or-Seperator").style.display = "none";
     document.getElementById("or-Seperator1").style.display = "none";
 	document.getElementById("search-field").style.padding = "0px 0px 0px 0px";
-	document.getElementById("header-title").style.height = "120px"
+	document.getElementById("header-title").style.height = "60px"
 
 
 	document.getElementById("search-title").style.display = "none";
@@ -351,3 +377,4 @@ function changeHeader(){
 	//document.getElementById("searchButton").style.height="30%";
 
 }
+
